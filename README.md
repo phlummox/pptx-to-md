@@ -30,7 +30,7 @@ $ ./pptx-to-yaml.py [--use-server HOST:PORT] INPUT_FILE OUTPUT_FILE IMAGE_DIR
 
 It will be created if it doesn't exist.
 
-See [soofice-server](#soffice-server) below for details of
+See [soffice-server](#soffice-server) below for details of
 what `--use-server` is for.
 
 ## PowerPoint features supported
