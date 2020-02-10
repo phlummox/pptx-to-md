@@ -172,7 +172,7 @@ class SlideConverter:
   """given some file we want to convert to yaml, do so".
 
   An store a few useful bits of data so we don't
-  have to pass them around.""
+  have to pass them around."""
 
   def __init__(self, dwrap, filepath):
     """dwrap = a dwrap object,
