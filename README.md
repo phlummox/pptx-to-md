@@ -7,7 +7,7 @@ presentation) to [Beamer](https://ctan.org/pkg/beamer)-friendly,
 Pandoc-style markdown.
 
 It's a two part conversion: one script (`pptx-to-yaml.py`)
-converted from pptx (or ppt, odp etc) into an intermediate
+converts from pptx (or ppt, odp etc) into an intermediate
 YAML format, then another (`yaml-to-md.py`) converts the
 YAML to Pandoc-style markdown.
 
@@ -100,7 +100,7 @@ Convenience wrapper around pptx-to-yaml and yaml-to-md. Also converts
 SVG files to encapsulated PostScript (EPS) for use by LaTeX,
 and attempts to use Pandoc to create LaTeX and PDF files.
 (If it fails, that means the .md file needs some tidying, so the
-PDF files just isn't produced.)
+PDF file just isn't produced.)
 
 
 ## prerequisites
@@ -139,6 +139,13 @@ LibreOffice than 5.1.6.
 You can if you want, but there's no guarantee I'll fix them.
 The scripts are really just offered as a starting point for
 anyone else who wants to improve them.
+
+## (Un)license
+
+This software is in the public domain. Do with it what you will.
+If you manage to improve it, it would be nice to hear from
+you. Try contacting me on Twitter, handle 
+[`@phlummox`](https://twitter.com/phlummox).
 
 ## troubleshooting
 
