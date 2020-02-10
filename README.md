@@ -1,10 +1,20 @@
 
 # pptx-to-md
 
-Two-part converter from PowerPoint/Impress to beamer-friendly,
-Pandoc-style markdown. 
-(1) convert pptx (or ppt, or odp) into intermediate
-YAML, then (2) convert YAML into markdown.
+Converts presentation files (PowerPoint/Impress,
+or anything else that LibreOffice can read as a
+presentation) to [Beamer](https://ctan.org/pkg/beamer)-friendly,
+Pandoc-style markdown.
+
+It's a two part conversion: one script (`pptx-to-yaml.py`)
+converted from pptx (or ppt, odp etc) into an intermediate
+YAML format, then another (`yaml-to-md.py`) converts the
+YAML to Pandoc-style markdown.
+
+As a convenience, a Bash wrapper script is provided (`converter.sh`)
+which calls both of these, and handles a few other graphics-conversion
+tasks (such as converting SVG files, which LaTeX can't natively read,
+to encapsulated PostScript files, which it can).
 
 ## pptx-to-yaml usage
 
@@ -16,14 +26,20 @@ $ ./pptx-to-yaml.py [--use-server HOST:PORT] INPUT_FILE OUTPUT_FILE IMAGE_DIR
 
 `OUTPUT_FILE` is the name of the YAML file to be written.
 
-IMAGE_DIR is a directory where images will be extracted to.
+`IMAGE_DIR` is a directory where images will be extracted to.
 
 It will be created if it doesn't exist.
+
+See [soofice-server](#soffice-server) below for details of
+what `--use-server` is for.
 
 ## PowerPoint features supported
 
 Title text, "outline" text (i.e. bullets) and embedded
 graphics like JPEGs or PNGs are handled reasonably well.
+Formatting such as italics, bold or colouring of text
+is not preserved. Nor are numbered lists - they're
+converted into bulleted lists.
 
 Embedded "metafiles" (EMF or WMF vector graphics)
 should get converted to SVG. (And thence to EPS, if you
@@ -37,10 +53,10 @@ and export them as an SVG.
 
 `pptx-to-yaml.py` attempts to start an `soffice` process
 and communicate with it over port 2002 on the local host;
-it's the `soffice` process that "knows" how to read
-PowerPoint etc files.
+it's the `soffice` process that knows how to read
+and manipulate PowerPoint files.
 
-However, the `HOST:PORT` can be supplied if you prefer
+However, the `HOST:PORT` arguments can be supplied if you prefer
 to run your own instance of `soffice` as a separate process.
 Which you might want to, since:
 
@@ -48,6 +64,7 @@ a.  If you have a lot of files to convert, you can just
     keep one `soffice` process running, and re-use it,
     avoiding the time taken to start a new process for
     each document.
+
 b.  Sometimes `pptx-to-yaml.py` just doesn't seem to
     start the `soffice` process up correctly - I have no idea why.
 
@@ -80,10 +97,10 @@ $ ./convert.sh [INPUT_FILE..]
 ```
 
 Convenience wrapper around pptx-to-yaml and yaml-to-md. Also converts
-SVG files to encapsulaed PostScript (EPS) for use by LaTeX,
-and attempts to use Pandoc to output .tex and .pdf.
-(If it fails, the .md file needs some tidying, so the
-.pdf just isn't output.)
+SVG files to encapsulated PostScript (EPS) for use by LaTeX,
+and attempts to use Pandoc to create LaTeX and PDF files.
+(If it fails, that means the .md file needs some tidying, so the
+PDF files just isn't produced.)
 
 
 ## prerequisites
